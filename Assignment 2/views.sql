@@ -12,8 +12,6 @@ UPDATE TRIPS SET city_id=1;
 CREATE SEQUENCE companies_seq START WITH 1;
 CREATE TABLE companies (id number primary key, name VARCHAR2(256));
 INSERT INTO companies (id, name) VALUES (companies_seq.NEXTVAL, 'Capgemini');
-UPDATE user_payment_methods SET company_id=1, business_account='t' where user_id = 3;
-
 
 --add fields "business_account" and company_id to storage if the payment method is supported by a company and the reference to the company in such case
 ALTER TABLE user_payment_methods ADD business_account CHAR(1);
@@ -23,6 +21,7 @@ ALTER TABLE user_payment_methods
     ADD CONSTRAINT usr_pmnt_mthds_companies_fk FOREIGN KEY ( company_id )
         REFERENCES companies ( id );
 
+UPDATE user_payment_methods SET company_id=1, business_account='t' where user_id = 3;
 
 --Add field to trip_statuses to be able to know what of the statuses is the successful one without to hardcode strings
 ALTER TABLE trip_statuses ADD successful_trip CHAR(1);
