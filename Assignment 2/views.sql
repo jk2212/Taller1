@@ -30,20 +30,7 @@ UPDATE trip_statuses SET successful_trip = 't' WHERE name = 'Successful';
 
 
 --1
-CREATE OR REPLACE VIEW MEDIOS_PAGO_CLIENTES AS
-SELECT 
-    u.id as CLIENTE_ID,
-    u.name || ' ' || u.last_name as NOMBRE_CLIENTE,
-    pm.id as MEDIO_PAGO_ID,
-    pm.name as TIPO,
-    upm.card_number as DETALLES_MEDIO_PAGO,
-    case when upm.business_account = 'f' or upm.business_account is null then 'FALSO' else 'VERDADERO' end as EMPRESARIAL,
-    c.name as NOMBRE_EMPRESA    
-FROM users u
-    INNER JOIN user_payment_methods upm on u.id = upm.user_id
-    INNER JOIN payment_methods pm on upm.payment_method_id = pm.id
-    LEFT JOIN companies c on upm.company_id = c.id;
-    
+     
 --2    
 CREATE OR REPLACE VIEW VIAJES_CLIENTES AS
 SELECT
